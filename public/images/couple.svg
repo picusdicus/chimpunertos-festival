@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8aaa60;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a4a28;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bgGradient)"/>
+
+  <!-- Couple illustration -->
+  <g>
+    <!-- Left person -->
+    <circle cx="400" cy="250" r="60" fill="#d4c9a8"/>
+    <path d="M 350 320 Q 350 380 380 420 L 420 420 Q 450 380 450 320 Z" fill="#f5efe0"/>
+    <path d="M 360 340 L 340 420" stroke="#d4c9a8" stroke-width="30" stroke-linecap="round"/>
+    <path d="M 440 340 L 460 420" stroke="#d4c9a8" stroke-width="30" stroke-linecap="round"/>
+
+    <!-- Right person -->
+    <circle cx="800" cy="250" r="60" fill="#d4c9a8"/>
+    <path d="M 750 320 Q 750 380 780 420 L 820 420 Q 850 380 850 320 Z" fill="#f5efe0"/>
+    <path d="M 760 340 L 740 420" stroke="#d4c9a8" stroke-width="30" stroke-linecap="round"/>
+    <path d="M 840 340 L 860 420" stroke="#d4c9a8" stroke-width="30" stroke-linecap="round"/>
+
+    <!-- Heart between them -->
+    <text x="600" y="300" font-size="80" text-anchor="middle" fill="#e8b84b">💕</text>
+  </g>
+
+  <!-- Text overlay -->
+  <text x="600" y="650" font-family="serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ffffff">
+    Sole & Dani
+  </text>
+  <text x="600" y="710" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#d4c9a8" letter-spacing="4">
+    2026
+  </text>
+</svg>
