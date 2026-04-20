@@ -90,7 +90,7 @@ export function WallOfFameSection({ guest }: WallOfFameSectionProps) {
           Wall of Fame
         </h2>
         <p className="text-center text-[var(--color-text-muted)] font-inter mb-8">
-          Deja un mensaje para los novios
+          Dejad vuestra huella
         </p>
 
         <form onSubmit={handleSubmit} className="mb-8">

@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { HeroSection } from '@/components/invitation/HeroSection'
 import { FestivalHeader } from '@/components/invitation/FestivalHeader'
 import { DateSection } from '@/components/invitation/DateSection'
+import { EventDescriptionSection } from '@/components/invitation/EventDescriptionSection'
 import { CountdownTimer } from '@/components/invitation/CountdownTimer'
 import { LocationSection } from '@/components/invitation/LocationSection'
 import { RSVPSection } from '@/components/invitation/RSVPSection'
@@ -48,6 +49,8 @@ export default async function InvitePage({ params }: InvitePageProps) {
       <FestivalHeader />
 
       <DateSection />
+
+      <EventDescriptionSection />
 
       <CountdownTimer targetDate="2026-09-25T18:00:00" />
 

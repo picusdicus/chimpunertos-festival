@@ -3,50 +3,34 @@ import { Badge } from '@/components/ui/Badge'
 function PyramidLogo() {
   return (
     <svg
-      className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4"
-      viewBox="0 0 100 120"
+      className="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4"
+      viewBox="0 0 120 120"
       fill="none"
     >
-      {/* Pyramid levels with gradient effect */}
-      <defs>
-        <linearGradient
-          id="pyramidGradient"
-          x1="50"
-          y1="0"
-          x2="50"
-          y2="100"
-        >
-          <stop
-            offset="0%"
-            stopColor="var(--color-green-light)"
-          />
-          <stop
-            offset="100%"
-            stopColor="var(--color-green-dark)"
-          />
-        </linearGradient>
-      </defs>
+      {/* Peak dot */}
+      <circle cx="60" cy="18" r="3.5" fill="var(--color-gold)" />
 
-      {/* Top triangle */}
+      {/* Outer triangle outline */}
       <polygon
-        points="50,10 20,50 80,50"
-        fill="url(#pyramidGradient)"
+        points="60,22 20,100 100,100"
+        fill="none"
+        stroke="var(--color-green-dark)"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
       />
 
-      {/* Middle triangle */}
+      {/* Triangle bands - light at top to dark at bottom */}
       <polygon
-        points="50,50 10,90 90,90"
+        points="60,22 40,62 80,62"
+        fill="var(--color-green-light)"
+      />
+      <polygon
+        points="40,62 30,82 90,82 80,62"
         fill="var(--color-green-mid)"
       />
-
-      {/* Bottom line/stage */}
-      <line
-        x1="10"
-        y1="90"
-        x2="90"
-        y2="90"
-        stroke="var(--color-gold)"
-        strokeWidth="2"
+      <polygon
+        points="30,82 20,100 100,100 90,82"
+        fill="var(--color-green-dark)"
       />
     </svg>
   )
@@ -54,30 +38,61 @@ function PyramidLogo() {
 
 export interface FestivalHeaderProps {
   showBadges?: boolean
+  coupleNames?: { first: string; second: string }
+  year?: number
+  location?: string
 }
 
 export function FestivalHeader({
   showBadges = true,
+  coupleNames = { first: 'Dani', second: 'Sole' },
+  year = 2026,
+  location = 'Navalcarnero',
 }: FestivalHeaderProps) {
   return (
     <div className="w-full py-8 sm:py-12 bg-[var(--color-cream)] border-b-4 border-[var(--color-green-dark)]">
       <div className="max-w-2xl mx-auto px-4">
+        {/* Top tagline */}
+        <p className="text-center text-[var(--color-green-dark)] text-sm sm:text-base font-semibold uppercase tracking-[0.3em] mb-6">
+          Edición única · {location} · {year}
+        </p>
+
         <PyramidLogo />
 
-        <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-center text-[var(--color-green-dark)] uppercase tracking-tight mb-2">
-          Chimpunerto's
+        <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-center uppercase tracking-tight mb-2">
+          <span className="text-[var(--color-green-dark)]">Chimpunerto</span>
+          <span className="text-[var(--color-gold)]">&apos;S</span>
         </h1>
 
-        <p className="text-center text-[var(--color-green-dark)] text-lg sm:text-xl font-semibold uppercase tracking-widest mb-6">
+        <p className="text-center text-[var(--color-green-dark)] text-lg sm:text-xl font-semibold uppercase tracking-[0.3em] mb-4">
           Festival
         </p>
+
+        {/* Subtitle tagline */}
+        <p className="text-center text-[var(--color-text-muted)] text-sm sm:text-base uppercase tracking-[0.2em] mb-8 font-inter">
+          Una noche · Un lugar · Una vez
+        </p>
+
+        {/* Couple names banner */}
+        <div className="bg-[var(--color-green-dark)] py-4 px-6 mb-8">
+          <p className="font-playfair text-2xl sm:text-3xl font-bold text-center text-[var(--color-white-warm)] uppercase tracking-wide flex items-center justify-center gap-3">
+            <span>{coupleNames.first}</span>
+            <span
+              className="text-[var(--color-gold)] text-4xl sm:text-5xl font-normal italic leading-none"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              &amp;
+            </span>
+            <span>{coupleNames.second}</span>
+          </p>
+        </div>
 
         {showBadges && (
           <div className="flex flex-wrap gap-3 justify-center">
             <Badge>Ceremonia</Badge>
             <Badge>Banquete</Badge>
             <Badge>Fiesta</Badge>
-            <Badge variant="outline">Edición 2026</Badge>
+            <Badge variant="outline">Edición {year}</Badge>
           </div>
         )}
       </div>

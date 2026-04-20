@@ -5,10 +5,10 @@ export function SetListSection() {
     <div className="w-full py-12 px-4 bg-[var(--color-cream)]">
       <div className="max-w-2xl mx-auto">
         <h2 className="font-playfair text-3xl font-bold text-[var(--color-green-dark)] mb-4 text-center">
-          Set List
+          Line Up
         </h2>
         <p className="text-center text-[var(--color-text-muted)] font-inter mb-8">
-          La música que sonará en el festival
+          Cartel del festival
         </p>
 
         {playlistId ? (
