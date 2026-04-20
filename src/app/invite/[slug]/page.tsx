@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import type { Guest } from '@/types'
 import { HeroSection } from '@/components/invitation/HeroSection'
 import { FestivalHeader } from '@/components/invitation/FestivalHeader'
 import { DateSection } from '@/components/invitation/DateSection'
@@ -7,8 +8,8 @@ import { EventDescriptionSection } from '@/components/invitation/EventDescriptio
 import { CountdownTimer } from '@/components/invitation/CountdownTimer'
 import { LocationSection } from '@/components/invitation/LocationSection'
 import { RSVPSection } from '@/components/invitation/RSVPSection'
-import { SetListSection } from '@/components/invitation/SetListSection'
 import { WallOfFameSection } from '@/components/invitation/WallOfFameSection'
+import { PlaylistSection } from '@/components/invitation/PlaylistSection'
 
 export interface InvitePageProps {
   params: Promise<{
@@ -36,7 +37,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
     .from('guests')
     .select('*')
     .eq('slug', slug)
-    .single()
+    .single<Guest>()
 
   if (error || !guest) {
     notFound()
@@ -58,9 +59,9 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
       <RSVPSection guest={guest} />
 
-      <SetListSection />
-
       <WallOfFameSection guest={guest} />
+
+      <PlaylistSection guestName={guest.name} />
     </main>
   )
 }
