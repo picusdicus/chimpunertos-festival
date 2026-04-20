@@ -83,4 +83,3 @@ Actualiza src/app/layout.tsx con:
 
 Haz commit: "feat: sistema de diseño, tokens CSS y componentes base"
 Haz push a feature/diseno-sistema
-Abre Pull Request hacia main: "Design: Sistema de diseño y componentes base"
