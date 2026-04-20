@@ -1,15 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { validateAndConsumeState } from '@/lib/spotify-state'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const code = searchParams.get('code')
   const state = searchParams.get('state')
+  const error = searchParams.get('error')
 
-  const storedState = request.cookies.get('spotify_state')?.value
-
-  if (!code || !state || state !== storedState) {
+  if (error) {
     return NextResponse.json(
-      { error: 'Invalid OAuth state or missing code' },
+      { error: `Spotify authorization denied: ${error}` },
+      { status: 400 }
+    )
+  }
+
+  if (!code) {
+    return NextResponse.json(
+      { error: 'Missing authorization code from Spotify' },
+      { status: 400 }
+    )
+  }
+
+  if (!state) {
+    return NextResponse.json(
+      { error: 'Missing state parameter from Spotify' },
+      { status: 400 }
+    )
+  }
+
+  // Validate state against server-side store
+  const isValidState = validateAndConsumeState(state)
+  if (!isValidState) {
+    console.error('State validation failed:', { received: state })
+    return NextResponse.json(
+      { error: 'State validation failed - possible CSRF attack' },
       { status: 400 }
     )
   }
@@ -56,6 +80,7 @@ export async function GET(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
+      path: '/',
       maxAge: data.expires_in,
     })
 
@@ -63,11 +88,9 @@ export async function GET(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
+      path: '/',
       maxAge: 60 * 60 * 24 * 365, // 1 year
     })
-
-    // Clear state cookie
-    redirectResponse.cookies.delete('spotify_state')
 
     return redirectResponse
   } catch (error) {
