@@ -6,7 +6,8 @@ import { DateSection } from '@/components/invitation/DateSection'
 import { CountdownTimer } from '@/components/invitation/CountdownTimer'
 import { LocationSection } from '@/components/invitation/LocationSection'
 import { RSVPSection } from '@/components/invitation/RSVPSection'
-import { PlaylistSection } from '@/components/invitation/PlaylistSection'
+import { SetListSection } from '@/components/invitation/SetListSection'
+import { WallOfFameSection } from '@/components/invitation/WallOfFameSection'
 
 export interface InvitePageProps {
   params: Promise<{
@@ -42,7 +43,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
   return (
     <main className="min-h-screen bg-[var(--color-white-warm)]">
-      <HeroSection imageUrl="/images/couple.svg" />
+      <HeroSection imageUrl="/images/couple.jpg" />
 
       <FestivalHeader />
 
@@ -54,7 +55,9 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
       <RSVPSection guest={guest} />
 
-      <PlaylistSection />
+      <SetListSection />
+
+      <WallOfFameSection guest={guest} />
     </main>
   )
 }

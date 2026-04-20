@@ -1,43 +1,44 @@
 export interface LocationSectionProps {
   venue?: string
   address?: string
-  distance?: string
-  accessTime?: string
-  ceremonyTime?: string
   parkingNote?: string
 }
 
 export function LocationSection({
   venue = 'Escuela de Equitación RMB',
   address = 'Navalcarnero, Madrid',
-  distance = 'A 35 min del centro',
-  accessTime = '17:30h',
-  ceremonyTime = '18:00h',
   parkingNote = 'Parking disponible en la finca',
 }: LocationSectionProps) {
-  const mapsUrl =
-    'https://www.google.com/maps/place/Navalcarnero,+Madrid/@40.2576,-3.8726,13z'
+  const lat = 40.30277535135261
+  const lng = -4.034611845561385
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
+  const embedUrl = `https://www.google.com/maps?q=${lat},${lng}&z=16&output=embed`
 
   return (
     <div className="w-full py-12 px-4 bg-[var(--color-surface)]">
       <div className="max-w-4xl mx-auto">
         {/* Venue Info */}
         <div className="mb-8">
-          <h2 className="font-playfair text-3xl font-bold text-[var(--color-green-dark)] mb-4">
-            {venue}
+          <h2 className="font-playfair text-3xl font-bold mb-4">
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[var(--color-gold)] underline decoration-2 underline-offset-4 hover:text-[var(--color-green-dark)] transition-colors"
+            >
+              {venue}
+              <span className="text-xl" aria-hidden="true">↗</span>
+            </a>
           </h2>
-          <p className="text-lg text-[var(--color-text-muted)] font-inter mb-2">
+          <p className="text-lg text-[var(--color-text-muted)] font-inter">
             {address}
-          </p>
-          <p className="text-sm text-[var(--color-text-hint)] font-inter">
-            {distance}
           </p>
         </div>
 
         {/* Map */}
         <div className="mb-8 rounded-lg overflow-hidden border-2 border-[var(--color-green-dark)]">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3034.8756483644063!2d-3.8726!3d40.2576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd418f5f9e8f8f8f%3A0x0!2sNavalcarnero%2C%20Madrid!5e0!3m2!1ses!2ses!4v1234567890"
+            src={embedUrl}
             width="100%"
             height="400"
             style={{ border: 0 }}
@@ -52,15 +53,26 @@ export function LocationSection({
           <h3 className="font-semibold text-[var(--color-green-dark)] mb-4 uppercase tracking-wide">
             Horarios
           </h3>
-          <div className="space-y-2 font-inter text-[var(--color-text-dark)]">
+          <div className="space-y-3 font-inter text-[var(--color-text-dark)]">
+            <div>
+              <p>
+                <span className="font-semibold">12:15h</span> · Ceremonia
+              </p>
+              <p className="text-sm text-[var(--color-text-muted)]">
+                Registro Civil de Navalcarnero
+              </p>
+            </div>
             <p>
-              <span className="font-semibold">Acceso:</span> {accessTime}
+              <span className="font-semibold">13:30h</span> · Comida
             </p>
             <p>
-              <span className="font-semibold">Ceremonia:</span> {ceremonyTime}
+              <span className="font-semibold">17:30h</span> · Apertura de puertas del festival
             </p>
             <p>
-              <span className="font-semibold">Fiesta:</span> Hasta tarde 🎉
+              <span className="font-semibold">18:00h</span> · Artistas invitados
+            </p>
+            <p>
+              <span className="font-semibold">19:30h</span> · Comienzo del festival 🎉
             </p>
           </div>
         </div>
