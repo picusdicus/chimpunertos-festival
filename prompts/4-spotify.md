@@ -6,10 +6,10 @@ Asegúrate de tener los cambios de main (git merge main).
 Implementa la integración completa con Spotify.
 
 VARIABLES DE ENTORNO necesarias en .env.local:
-SPOTIFY_CLIENT_ID=tu_client_id
-SPOTIFY_CLIENT_SECRET=tu_client_secret
+SPOTIFY_CLIENT_ID=c6d7276b890247e190e8b6d22f9041c2
+SPOTIFY_CLIENT_SECRET=9b2886ecfea741dc8c2b38af6499ac57
 SPOTIFY_REDIRECT_URI=http://127.0.0.1:3000/api/spotify/callback
-NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID=id_de_tu_playlist
+NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID=37i9dQZF1DXcBWIGoYBM5M
 
 FLUJO OAUTH — crea estos Route Handlers:
 
