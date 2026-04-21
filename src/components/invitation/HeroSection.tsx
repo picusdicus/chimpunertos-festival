@@ -12,13 +12,13 @@ export function HeroSection({
   subtitle = 'Nos casamos · 25 Sep · 2026',
 }: HeroSectionProps) {
   return (
-    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden animate-fade-in">
+    <div className="relative w-full aspect-[4/3] md:aspect-auto md:h-screen flex items-center justify-center overflow-hidden animate-fade-in">
       <Image
         src={imageUrl}
         alt={coupleNames}
         fill
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-center"
         priority
       />
 
