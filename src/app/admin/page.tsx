@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { createServerClient } from '@supabase/ssr'
 import type { Database } from '@/types/database'
 import GuestTable from './GuestTable'
