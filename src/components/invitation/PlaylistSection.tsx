@@ -28,6 +28,8 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
   const [addingId, setAddingId] = useState<string | null>(null)
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set())
   const [errors, setErrors] = useState<Map<string, string>>(new Map())
+  const [iframeKey, setIframeKey] = useState(0)
+  const [lastAddedName, setLastAddedName] = useState<string | null>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const playlistId = process.env.NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID
 
@@ -85,8 +87,13 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
       if (!response.ok) throw new Error(data.error ?? 'Error al añadir')
 
       setAddedIds((prev) => new Set(prev).add(track.id))
+      setLastAddedName(track.name)
       setQuery('')
       setResults([])
+      setTimeout(() => {
+        setIframeKey((k) => k + 1)
+        setLastAddedName(null)
+      }, 3000)
 
       setTimeout(() => {
         setAddedIds((prev) => {
@@ -118,12 +125,12 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
         </p>
         <h2
           className="font-playfair text-3xl font-bold text-center uppercase mb-2"
-          style={{ color: '#3d6b3a' }}
+          style={{ color: '#814368' }}
         >
           El Setlist
         </h2>
         <p className="text-center font-inter text-base mb-8" style={{ color: '#5a5a5a' }}>
-          Elige una canción para la fiesta,{' '}
+          Elige tus temazos para el festival,{' '}
           <span className="font-semibold">{guestName}</span>
         </p>
 
@@ -154,7 +161,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
               border: '1px solid #d4c9a8',
               borderRadius: '2px',
               background: '#ffffff',
-              color: '#2a4a28',
+              color: '#5c2f4a',
             }}
           />
         </div>
@@ -212,7 +219,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
                         <div style={{ width: 40, height: 40, borderRadius: '4px', background: '#e8dfc8', flexShrink: 0 }} />
                       )}
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm truncate" style={{ color: '#2a4a28' }}>
+                        <p className="font-semibold text-sm truncate" style={{ color: '#5c2f4a' }}>
                           {track.name}
                         </p>
                         <p className="text-xs truncate" style={{ color: '#8a7a50' }}>
@@ -227,7 +234,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
                           width: 26,
                           height: 26,
                           borderRadius: '2px',
-                          background: isAdded ? '#5aaa5a' : '#3d6b3a',
+                          background: isAdded ? '#b07898' : '#814368',
                           cursor: isAdding || isAdded ? 'default' : 'pointer',
                         }}
                         aria-label="Añadir canción"
@@ -255,6 +262,16 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
           </div>
         )}
 
+        {/* Thank you message */}
+        {lastAddedName && (
+          <div
+            className="mb-6 px-4 py-3 rounded text-center font-inter text-sm font-semibold"
+            style={{ background: '#eaf5ea', border: '1px solid #b07898', color: '#5c2f4a' }}
+          >
+            🎵 ¡Gracias! <span className="italic">{lastAddedName}</span> ya forma parte del setlist
+          </div>
+        )}
+
         {/* Separator */}
         <div className="flex items-center gap-4 my-8">
           <div className="flex-1 h-px" style={{ background: '#d4c9a8' }} />
@@ -268,6 +285,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
         {playlistId && (
           <>
             <iframe
+              key={iframeKey}
               src={`https://open.spotify.com/embed/playlist/${playlistId}?theme=0`}
               width="100%"
               height="380"

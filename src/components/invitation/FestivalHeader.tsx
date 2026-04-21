@@ -7,10 +7,7 @@ function PyramidLogo() {
       viewBox="0 0 120 120"
       fill="none"
     >
-      {/* Peak dot */}
       <circle cx="60" cy="18" r="3.5" fill="var(--color-gold)" />
-
-      {/* Outer triangle outline */}
       <polygon
         points="60,22 20,100 100,100"
         fill="none"
@@ -18,20 +15,9 @@ function PyramidLogo() {
         strokeWidth="2.5"
         strokeLinejoin="round"
       />
-
-      {/* Triangle bands - light at top to dark at bottom */}
-      <polygon
-        points="60,22 40,62 80,62"
-        fill="var(--color-green-light)"
-      />
-      <polygon
-        points="40,62 30,82 90,82 80,62"
-        fill="var(--color-green-mid)"
-      />
-      <polygon
-        points="30,82 20,100 100,100 90,82"
-        fill="var(--color-green-dark)"
-      />
+      <polygon points="60,22 40,62 80,62" fill="var(--color-green-light)" />
+      <polygon points="40,62 30,82 90,82 80,62" fill="var(--color-green-mid)" />
+      <polygon points="30,82 20,100 100,100 90,82" fill="var(--color-green-dark)" />
     </svg>
   )
 }
@@ -61,7 +47,7 @@ export function FestivalHeader({
 
         <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-center uppercase tracking-tight mb-2">
           <span className="text-[var(--color-green-dark)]">Chimpunerto</span>
-          <span className="text-[var(--color-gold)]">&apos;S</span>
+          <span style={{ color: '#ad43b3' }}>&apos;S</span>
         </h1>
 
         <p className="text-center text-[var(--color-green-dark)] text-lg sm:text-xl font-semibold uppercase tracking-[0.3em] mb-4">
@@ -70,7 +56,7 @@ export function FestivalHeader({
 
         {/* Subtitle tagline */}
         <p className="text-center text-[var(--color-text-muted)] text-sm sm:text-base uppercase tracking-[0.2em] mb-8 font-inter">
-          Una noche · Un lugar · Una vez
+          Un lugar · Una vez · Un SÍ para siempre
         </p>
 
         {/* Couple names banner */}
@@ -78,8 +64,8 @@ export function FestivalHeader({
           <p className="font-playfair text-2xl sm:text-3xl font-bold text-center text-[var(--color-white-warm)] uppercase tracking-wide flex items-center justify-center gap-3">
             <span>{coupleNames.first}</span>
             <span
-              className="text-[var(--color-gold)] text-4xl sm:text-5xl font-normal italic leading-none"
-              style={{ fontFamily: 'Playfair Display, serif' }}
+              className="text-4xl sm:text-5xl font-normal italic leading-none"
+              style={{ color: '#c13a64', fontFamily: 'Playfair Display, serif' }}
             >
               &amp;
             </span>
@@ -89,10 +75,21 @@ export function FestivalHeader({
 
         {showBadges && (
           <div className="flex flex-wrap gap-3 justify-center">
-            <Badge>Ceremonia</Badge>
-            <Badge>Banquete</Badge>
-            <Badge>Fiesta</Badge>
-            <Badge variant="outline">Edición {year}</Badge>
+            {[
+              { label: 'Evento', href: '#evento' },
+              { label: 'Lugar', href: '#lugar' },
+              { label: 'Horarios', href: '#horarios' },
+              { label: 'RSVP', href: '#rsvp' },
+              { label: 'Set List', href: '#setlist' },
+            ].map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                className="transition-transform hover:scale-105 hover:opacity-90 active:scale-95"
+              >
+                <Badge>{label}</Badge>
+              </a>
+            ))}
           </div>
         )}
       </div>

@@ -40,7 +40,7 @@ export function DateSection({
 
         {/* Location and time */}
         <p className="text-center sm:text-left text-[var(--color-text-muted)] font-inter">
-          {location} · Puertas: {time}
+          {location}
         </p>
       </div>
     </div>

@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
   console.log(data.refresh_token)
   console.log('\n')
 
-  const response = NextResponse.redirect(new URL('/admin', request.url))
+  const response = NextResponse.redirect(new URL('/', request.url))
 
   response.cookies.set('spotify_access_token', data.access_token, {
     httpOnly: true,

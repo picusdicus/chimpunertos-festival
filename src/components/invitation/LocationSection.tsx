@@ -49,27 +49,34 @@ export function LocationSection({
         </div>
 
         {/* Schedule */}
-        <div className="bg-[var(--color-white-warm)] border-l-4 border-[var(--color-gold)] p-6 mb-8">
+        <div id="horarios" className="bg-[var(--color-white-warm)] border-l-4 border-[var(--color-gold)] p-6 mb-8">
           <h3 className="font-semibold text-[var(--color-green-dark)] mb-4 uppercase tracking-wide">
             Horarios
           </h3>
           <div className="space-y-3 font-inter text-[var(--color-text-dark)]">
             <div>
               <p>
-                <span className="font-semibold">12:15h</span> · Ceremonia
+                <span className="font-semibold">12:00h</span> · El Sí Quiero
               </p>
-              <p className="text-sm text-[var(--color-text-muted)]">
-                Registro Civil de Navalcarnero
+              <p className="text-sm">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=40.29059963533149,-4.00689635766975"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--color-gold)] underline decoration-1 underline-offset-2 hover:text-[var(--color-green-dark)] transition-colors"
+                >
+                  Registro Civil de Navalcarnero ↗
+                </a>
               </p>
             </div>
             <p>
-              <span className="font-semibold">13:30h</span> · Comida
+              <span className="font-semibold">13:30h</span> · Comilona
             </p>
             <p>
-              <span className="font-semibold">17:30h</span> · Apertura de puertas del festival
+              <span className="font-semibold">17:30h</span> · Apertura de puertas del festival. Tachán!
             </p>
             <p>
-              <span className="font-semibold">18:00h</span> · Artistas invitados
+              <span className="font-semibold">18:00h</span> · Teloneros
             </p>
             <p>
               <span className="font-semibold">19:30h</span> · Comienzo del festival 🎉

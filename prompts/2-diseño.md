@@ -58,7 +58,7 @@ COMPONENTES A CREAR:
 5. src/components/invitation/DateSection.tsx
    - Bloque de fecha con borde verde oscuro estilo cartel
    - "25" grande a la izquierda, "Septiembre · 2026 / Viernes" a la derecha
-   - "Navalcarnero · Puertas: 17:30h" como subtítulo
+   - "Navalcarnero" como subtítulo
 
 6. src/components/invitation/CountdownTimer.tsx
    - Componente cliente ("use client")

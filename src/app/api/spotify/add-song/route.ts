@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     const accessToken = await getOwnerAccessToken()
 
     const addResponse = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      `https://api.spotify.com/v1/playlists/${playlistId}/items`,
       {
         method: 'POST',
         headers: {

@@ -10,15 +10,16 @@ export interface RSVPSectionProps {
   onRSVPChange?: () => void
 }
 
-export function RSVPSection({
-  guest,
-  onRSVPChange,
-}: RSVPSectionProps) {
+export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
   const [loading, setLoading] = useState(false)
   const [showPlusOne, setShowPlusOne] = useState(false)
-  const [plusOne, setPlusOne] = useState(false)
+  const [plusOne, setPlusOne] = useState(guest.plus_one ?? false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [editing, setEditing] = useState(false)
+  const [confirmedStatus, setConfirmedStatus] = useState<boolean | null>(
+    guest.confirmed
+  )
 
   const handleRSVP = async (confirmed: boolean) => {
     setLoading(true)
@@ -28,9 +29,7 @@ export function RSVPSection({
     try {
       const response = await fetch('/api/rsvp', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           guest_id: guest.id,
           confirmed,
@@ -43,25 +42,25 @@ export function RSVPSection({
         throw new Error(data.error || 'Error al guardar respuesta')
       }
 
+      setConfirmedStatus(confirmed)
+      setEditing(false)
+      setShowPlusOne(false)
       setSuccess(true)
       onRSVPChange?.()
 
-      setTimeout(() => {
-        setSuccess(false)
-      }, 3000)
+      setTimeout(() => setSuccess(false), 3000)
     } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : 'Error al procesar la respuesta'
+        err instanceof Error ? err.message : 'Error al procesar la respuesta'
       )
     } finally {
       setLoading(false)
     }
   }
 
-  const isConfirmed = guest.confirmed === true
-  const isRejected = guest.confirmed === false
+  const isConfirmed = confirmedStatus === true
+  const isRejected = confirmedStatus === false
+  const hasResponded = confirmedStatus !== null
 
   return (
     <div className="w-full py-12 px-4 bg-[var(--color-cream)]">
@@ -76,39 +75,54 @@ export function RSVPSection({
             encantados de celebrarlo contigo
           </p>
 
-          {/* Current Status */}
-          {isConfirmed && (
-            <div className="bg-[var(--color-green-light)]/20 border border-[var(--color-green-light)] rounded-lg p-4 mb-6 text-center">
-              <p className="text-[var(--color-green-dark)] font-semibold">
-                ✓ Confirmado tu asistencia
-              </p>
-              {guest.plus_one && (
-                <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                  Asistirás con acompañante
-                </p>
+          {/* Current status (when not editing) */}
+          {hasResponded && !editing && (
+            <>
+              {isConfirmed && (
+                <div className="bg-[var(--color-green-light)]/20 border border-[var(--color-green-light)] rounded-lg p-4 mb-4 text-center">
+                  <p className="text-[var(--color-green-dark)] font-semibold">
+                    ✓ Confirmada tu asistencia
+                  </p>
+                  {plusOne && (
+                    <p className="text-sm text-[var(--color-text-muted)] mt-1">
+                      Asistirás con acompañante
+                    </p>
+                  )}
+                </div>
               )}
-            </div>
+
+              {isRejected && (
+                <div className="bg-[var(--color-text-muted)]/20 border border-[var(--color-text-muted)] rounded-lg p-4 mb-4 text-center">
+                  <p className="text-[var(--color-text-dark)] font-semibold">
+                    Lo sentimos que no puedas asistir
+                  </p>
+                </div>
+              )}
+
+              <div className="text-center">
+                <button
+                  onClick={() => {
+                    setEditing(true)
+                    setShowPlusOne(false)
+                    setError(null)
+                  }}
+                  className="text-sm font-inter text-[var(--color-text-muted)] underline underline-offset-2 hover:text-[var(--color-green-dark)] transition-colors"
+                >
+                  Cambiar respuesta
+                </button>
+              </div>
+            </>
           )}
 
-          {isRejected && (
-            <div className="bg-[var(--color-text-muted)]/20 border border-[var(--color-text-muted)] rounded-lg p-4 mb-6 text-center">
-              <p className="text-[var(--color-text-dark)] font-semibold">
-                Lo sentimos que no puedas asistir
-              </p>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          {!isConfirmed && !isRejected ? (
+          {/* Action buttons (unanswered or editing) */}
+          {(!hasResponded || editing) && (
             <>
               <div className="space-y-4 mb-6">
                 <Button
                   variant="primary"
                   size="lg"
                   className="w-full"
-                  onClick={() => {
-                    setShowPlusOne(true)
-                  }}
+                  onClick={() => setShowPlusOne(true)}
                   disabled={loading}
                 >
                   Estaré en el festival 🎉
@@ -125,7 +139,6 @@ export function RSVPSection({
                 </Button>
               </div>
 
-              {/* Plus One Option */}
               {showPlusOne && (
                 <div className="bg-[var(--color-surface)] rounded-lg p-6 space-y-4">
                   <label className="flex items-center gap-3 cursor-pointer">
@@ -155,7 +168,7 @@ export function RSVPSection({
                       className="flex-1"
                       onClick={() => {
                         setShowPlusOne(false)
-                        setPlusOne(false)
+                        if (editing) setEditing(false)
                       }}
                       disabled={loading}
                     >
@@ -165,16 +178,14 @@ export function RSVPSection({
                 </div>
               )}
             </>
-          ) : null}
+          )}
 
-          {/* Error Message */}
           {error && (
             <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-700 text-sm font-inter">{error}</p>
             </div>
           )}
 
-          {/* Success Message */}
           {success && (
             <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-green-700 text-sm font-inter font-semibold">

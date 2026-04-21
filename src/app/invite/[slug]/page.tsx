@@ -10,6 +10,7 @@ import { LocationSection } from '@/components/invitation/LocationSection'
 import { RSVPSection } from '@/components/invitation/RSVPSection'
 import { WallOfFameSection } from '@/components/invitation/WallOfFameSection'
 import { PlaylistSection } from '@/components/invitation/PlaylistSection'
+import { ContactSection } from '@/components/invitation/ContactSection'
 
 export interface InvitePageProps {
   params: Promise<{
@@ -17,11 +18,8 @@ export interface InvitePageProps {
   }>
 }
 
-export async function generateMetadata({
-  params,
-}: InvitePageProps) {
+export async function generateMetadata({ params }: InvitePageProps) {
   const { slug } = await params
-
   return {
     title: `Invitación - Chimpunerto's Festival`,
     description: `Te invitamos a celebrar con nosotros en Chimpunerto's Festival 2026`,
@@ -49,19 +47,35 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
       <FestivalHeader />
 
-      <DateSection />
+      <div id="fecha">
+        <DateSection />
+      </div>
 
-      <EventDescriptionSection />
+      <div id="evento">
+        <EventDescriptionSection />
+      </div>
 
-      <CountdownTimer targetDate="2026-09-25T18:00:00" />
+      <div id="countdown">
+        <CountdownTimer targetDate="2026-09-25T18:00:00" />
+      </div>
 
-      <LocationSection />
+      <div id="lugar">
+        <LocationSection />
+      </div>
 
-      <RSVPSection guest={guest} />
+      <div id="rsvp">
+        <RSVPSection guest={guest} />
+      </div>
 
-      <WallOfFameSection guest={guest} />
+      <div id="mensajes">
+        <WallOfFameSection guest={guest} />
+      </div>
 
-      <PlaylistSection guestName={guest.name} />
+      <div id="setlist">
+        <PlaylistSection guestName={guest.name} />
+      </div>
+
+      <ContactSection />
     </main>
   )
 }
