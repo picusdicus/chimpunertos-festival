@@ -17,6 +17,7 @@ export function HeroSection({
         src={imageUrl}
         alt={coupleNames}
         fill
+        sizes="100vw"
         className="object-cover"
         priority
       />

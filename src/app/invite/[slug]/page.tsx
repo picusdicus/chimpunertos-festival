@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import type { Guest } from '@/types'
 import { HeroSection } from '@/components/invitation/HeroSection'
@@ -18,11 +19,27 @@ export interface InvitePageProps {
   }>
 }
 
-export async function generateMetadata({ params }: InvitePageProps) {
+export async function generateMetadata({ params }: InvitePageProps): Promise<Metadata> {
   const { slug } = await params
+  const supabase = await createClient()
+  const { data: guest } = await supabase
+    .from('guests')
+    .select('name')
+    .eq('slug', slug)
+    .single<Pick<Guest, 'name'>>()
+
+  const guestName = guest?.name ?? 'Invitado/a'
+  const title = `Chimpunerto's Festival · ${guestName}`
+  const description = 'Sole y Dani te invitan a su boda festival el 25 de Septiembre de 2026'
+
   return {
-    title: `Invitación - Chimpunerto's Festival`,
-    description: `Te invitamos a celebrar con nosotros en Chimpunerto's Festival 2026`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: ['/og-image.jpg'],
+    },
   }
 }
 
@@ -45,37 +62,41 @@ export default async function InvitePage({ params }: InvitePageProps) {
     <main className="min-h-screen bg-[var(--color-white-warm)]">
       <HeroSection imageUrl="/images/couple.jpg" />
 
-      <FestivalHeader />
+      <div className="animate-fade-in">
+        <FestivalHeader />
+      </div>
 
-      <div id="fecha">
+      <div id="fecha" className="animate-slide-up animate-delay-100">
         <DateSection />
       </div>
 
-      <div id="evento">
+      <div id="evento" className="animate-slide-up animate-delay-200">
         <EventDescriptionSection />
       </div>
 
-      <div id="countdown">
+      <div id="countdown" className="animate-slide-up animate-delay-300">
         <CountdownTimer targetDate="2026-09-25T18:00:00" />
       </div>
 
-      <div id="lugar">
+      <div id="lugar" className="animate-slide-up">
         <LocationSection />
       </div>
 
-      <div id="rsvp">
+      <div id="rsvp" className="animate-slide-up animate-delay-100">
         <RSVPSection guest={guest} />
       </div>
 
-      <div id="mensajes">
+      <div id="mensajes" className="animate-slide-up animate-delay-200">
         <WallOfFameSection guest={guest} />
       </div>
 
-      <div id="setlist">
+      <div id="setlist" className="animate-slide-up animate-delay-100">
         <PlaylistSection guestName={guest.name} />
       </div>
 
-      <ContactSection />
+      <div className="animate-slide-up animate-delay-200">
+        <ContactSection />
+      </div>
     </main>
   )
 }
