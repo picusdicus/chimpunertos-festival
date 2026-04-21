@@ -26,6 +26,7 @@ export type Database = {
           plus_one?: boolean | null
           created_at?: string
         }
+        Relationships: []
       }
       songs: {
         Row: {
@@ -55,10 +56,48 @@ export type Database = {
           album_image?: string | null
           added_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'songs_guest_id_fkey'
+            columns: ['guest_id']
+            isOneToOne: false
+            referencedRelation: 'guests'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      messages: {
+        Row: {
+          id: string
+          guest_id: string
+          content: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          guest_id: string
+          content: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          guest_id?: string
+          content?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'messages_guest_id_fkey'
+            columns: ['guest_id']
+            isOneToOne: false
+            referencedRelation: 'guests'
+            referencedColumns: ['id']
+          }
+        ]
       }
     }
-    Views: {}
-    Functions: {}
-    Enums: {}
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
