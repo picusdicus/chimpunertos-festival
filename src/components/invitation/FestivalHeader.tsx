@@ -1,26 +1,5 @@
+import Image from 'next/image'
 import { Badge } from '@/components/ui/Badge'
-
-function PyramidLogo() {
-  return (
-    <svg
-      className="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4"
-      viewBox="0 0 120 120"
-      fill="none"
-    >
-      <circle cx="60" cy="18" r="3.5" fill="var(--color-gold)" />
-      <polygon
-        points="60,22 20,100 100,100"
-        fill="none"
-        stroke="var(--color-green-dark)"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-      />
-      <polygon points="60,22 40,62 80,62" fill="var(--color-green-light)" />
-      <polygon points="40,62 30,82 90,82 80,62" fill="var(--color-green-mid)" />
-      <polygon points="30,82 20,100 100,100 90,82" fill="var(--color-green-dark)" />
-    </svg>
-  )
-}
 
 export interface FestivalHeaderProps {
   showBadges?: boolean
@@ -43,7 +22,14 @@ export function FestivalHeader({
           Edición única · {location} · {year}
         </p>
 
-        <PyramidLogo />
+        <Image
+          src="/images/logo-festival.jpg"
+          alt="Chimpunerto's Festival"
+          width={200}
+          height={200}
+          className="mx-auto mb-4"
+          priority
+        />
 
         <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-center uppercase tracking-tight mb-2">
           <span className="text-[var(--color-green-dark)]">Chimpunerto</span>
