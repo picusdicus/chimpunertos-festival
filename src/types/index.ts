@@ -4,6 +4,7 @@ export type Guest = {
   name: string
   confirmed: boolean | null
   plus_one: boolean | null
+  abono: 'completo' | 'tarde' | null
   created_at: string
 }
 
@@ -32,4 +33,5 @@ export type RSVPPayload = {
   guest_id: string
   confirmed: boolean
   plus_one: boolean
+  abono: 'completo' | 'tarde' | null
 }

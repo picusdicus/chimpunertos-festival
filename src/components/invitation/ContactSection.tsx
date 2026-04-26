@@ -22,8 +22,8 @@ export interface ContactSectionProps {
 }
 
 export function ContactSection({
-  daniPhone = '34600000000',
-  solePhone = '34600000001',
+  daniPhone = '34600864717',
+  solePhone = '34661067509',
 }: ContactSectionProps) {
   return (
     <div className="w-full py-12 px-4 bg-[var(--color-cream)]">

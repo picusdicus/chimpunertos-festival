@@ -5,7 +5,7 @@ import type { RSVPPayload } from '@/types'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { guest_id, confirmed, plus_one } = body as RSVPPayload
+    const { guest_id, confirmed, plus_one, abono } = body as RSVPPayload
 
     // Validation
     if (!guest_id || typeof guest_id !== 'string') {
@@ -29,6 +29,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    if (confirmed && abono !== 'completo' && abono !== 'tarde') {
+      return NextResponse.json(
+        { error: 'Debes seleccionar un tipo de abono' },
+        { status: 400 }
+      )
+    }
+
     const supabase = await createClient()
 
     const { data, error } = await supabase
@@ -36,6 +43,7 @@ export async function POST(request: NextRequest) {
       .update({
         confirmed,
         plus_one: confirmed ? plus_one : null,
+        abono: confirmed ? abono : null,
       })
       .eq('id', guest_id)
       .select()

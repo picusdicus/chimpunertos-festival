@@ -12,8 +12,8 @@ export interface RSVPSectionProps {
 
 export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
   const [loading, setLoading] = useState(false)
-  const [showPlusOne, setShowPlusOne] = useState(false)
-  const [plusOne, setPlusOne] = useState(guest.plus_one ?? false)
+  const [showAbono, setShowAbono] = useState(false)
+  const [abono, setAbono] = useState<'completo' | 'tarde' | null>(guest.abono ?? null)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -33,7 +33,8 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
         body: JSON.stringify({
           guest_id: guest.id,
           confirmed,
-          plus_one: confirmed ? plusOne : null,
+          plus_one: null,
+          abono: confirmed ? abono : null,
         }),
       })
 
@@ -44,7 +45,8 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
 
       setConfirmedStatus(confirmed)
       setEditing(false)
-      setShowPlusOne(false)
+      setShowAbono(false)
+      if (!confirmed) setAbono(null)
       setSuccess(true)
       onRSVPChange?.()
 
@@ -83,9 +85,9 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                   <p className="text-[var(--color-green-dark)] font-semibold">
                     ✓ Confirmada tu asistencia
                   </p>
-                  {plusOne && (
-                    <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                      Asistirás con acompañante
+                  {abono && (
+                    <p className="text-sm text-[var(--color-green-dark)] font-medium mt-1">
+                      {abono === 'completo' ? 'Abono completo · Todo incluido' : 'Abono de tarde · Festival y cena'}
                     </p>
                   )}
                 </div>
@@ -103,7 +105,8 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                 <button
                   onClick={() => {
                     setEditing(true)
-                    setShowPlusOne(false)
+                    setShowAbono(false)
+                    setAbono(guest.abono ?? null)
                     setError(null)
                   }}
                   className="text-sm font-inter text-[var(--color-text-muted)] underline underline-offset-2 hover:text-[var(--color-green-dark)] transition-colors"
@@ -122,7 +125,7 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                   variant="primary"
                   size="lg"
                   className="w-full"
-                  onClick={() => setShowPlusOne(true)}
+                  onClick={() => setShowAbono(true)}
                   disabled={loading}
                 >
                   Estaré en el festival 🎉
@@ -133,25 +136,53 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                   size="lg"
                   className="w-full"
                   onClick={() => handleRSVP(false)}
-                  loading={loading && !showPlusOne}
+                  loading={loading && !showAbono}
                 >
                   No podré asistir
                 </Button>
               </div>
 
-              {showPlusOne && (
-                <div className="bg-[var(--color-surface)] rounded-lg p-6 space-y-4">
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={plusOne}
-                      onChange={(e) => setPlusOne(e.target.checked)}
-                      className="w-5 h-5 accent-[var(--color-green-dark)]"
-                    />
-                    <span className="text-[var(--color-text-dark)] font-inter">
-                      Vendré con acompañante
-                    </span>
-                  </label>
+              {showAbono && (
+                <div className="bg-[var(--color-surface)] rounded-lg p-6 space-y-5">
+                  <div className="space-y-3">
+                    <p className="font-inter text-sm font-semibold text-[var(--color-text-dark)] uppercase tracking-wide">
+                      Tipo de abono
+                    </p>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setAbono('completo')}
+                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                          abono === 'completo'
+                            ? 'border-[var(--color-green-dark)] bg-[var(--color-green-dark)]/5'
+                            : 'border-[var(--color-text-muted)]/30 hover:border-[var(--color-green-dark)]/50'
+                        }`}
+                      >
+                        <p className="font-playfair font-bold text-[var(--color-green-dark)] text-sm">
+                          Abono completo
+                        </p>
+                        <p className="text-xs font-inter text-[var(--color-text-muted)] mt-1">
+                          Todo incluido
+                        </p>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setAbono('tarde')}
+                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                          abono === 'tarde'
+                            ? 'border-[var(--color-green-dark)] bg-[var(--color-green-dark)]/5'
+                            : 'border-[var(--color-text-muted)]/30 hover:border-[var(--color-green-dark)]/50'
+                        }`}
+                      >
+                        <p className="font-playfair font-bold text-[var(--color-green-dark)] text-sm">
+                          Abono de tarde
+                        </p>
+                        <p className="text-xs font-inter text-[var(--color-text-muted)] mt-1">
+                          Sólo festival y cena
+                        </p>
+                      </button>
+                    </div>
+                  </div>
 
                   <div className="flex gap-3">
                     <Button
@@ -159,6 +190,7 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                       className="flex-1"
                       onClick={() => handleRSVP(true)}
                       loading={loading}
+                      disabled={loading || !abono}
                     >
                       {loading && <LoadingSpinner size="sm" />}
                       Confirmar
@@ -167,7 +199,7 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                       variant="ghost"
                       className="flex-1"
                       onClick={() => {
-                        setShowPlusOne(false)
+                        setShowAbono(false)
                         if (editing) setEditing(false)
                       }}
                       disabled={loading}

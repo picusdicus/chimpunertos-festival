@@ -8,6 +8,7 @@ export type Database = {
           name: string
           confirmed: boolean | null
           plus_one: boolean | null
+          abono: string | null
           created_at: string
         }
         Insert: {
@@ -16,6 +17,7 @@ export type Database = {
           name: string
           confirmed?: boolean | null
           plus_one?: boolean | null
+          abono?: string | null
           created_at?: string
         }
         Update: {
@@ -24,6 +26,7 @@ export type Database = {
           name?: string
           confirmed?: boolean | null
           plus_one?: boolean | null
+          abono?: string | null
           created_at?: string
         }
         Relationships: []
