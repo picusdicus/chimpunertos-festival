@@ -127,7 +127,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
           className="font-playfair text-3xl font-bold text-center uppercase mb-2"
           style={{ color: '#814368' }}
         >
-          El Setlist
+          El cartel
         </h2>
         <p className="text-center font-inter text-base mb-8" style={{ color: '#5a5a5a' }}>
           Elige tus temazos para el festival,{' '}
@@ -252,7 +252,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
                     </div>
                     {trackError && (
                       <p className="px-3 pb-1 text-xs font-inter" style={{ color: '#c0392b' }}>
-                        {trackError.includes('duplicate') ? 'Ya está en el setlist' : trackError}
+                        {trackError.includes('duplicate') ? 'Ya está en El cartel' : trackError}
                       </p>
                     )}
                   </div>
@@ -268,7 +268,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
             className="mb-6 px-4 py-3 rounded text-center font-inter text-sm font-semibold"
             style={{ background: '#eaf5ea', border: '1px solid #b07898', color: '#5c2f4a' }}
           >
-            🎵 ¡Gracias! <span className="italic">{lastAddedName}</span> ya forma parte del setlist
+            🎵 ¡Gracias! <span className="italic">{lastAddedName}</span> ya forma parte dEl cartel
           </div>
         )}
 
@@ -276,7 +276,7 @@ export function PlaylistSection({ guestName }: PlaylistSectionProps) {
         <div className="flex items-center gap-4 my-8">
           <div className="flex-1 h-px" style={{ background: '#d4c9a8' }} />
           <span className="text-xs font-semibold uppercase tracking-widest font-inter" style={{ color: '#8a7a50' }}>
-            Escucha el setlist
+            Escuchas los artistas confirmados
           </span>
           <div className="flex-1 h-px" style={{ background: '#d4c9a8' }} />
         </div>

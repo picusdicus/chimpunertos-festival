@@ -66,7 +66,7 @@ export function FestivalHeader({
               { label: 'Lugar', href: '#lugar' },
               { label: 'Horarios', href: '#horarios' },
               { label: 'RSVP', href: '#rsvp' },
-              { label: 'Set List', href: '#setlist' },
+              { label: 'Artistas', href: '#setlist' },
             ].map(({ label, href }) => (
               <a
                 key={href}

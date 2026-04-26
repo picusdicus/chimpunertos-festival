@@ -49,7 +49,7 @@ Crea src/components/invitation/PlaylistSection.tsx ("use client") que:
 - Botón "+" en cada resultado para añadir
 - Al añadir: POST a /api/spotify/add-song
 - Lista de canciones ya añadidas (fetch al cargar desde tabla songs de Supabase)
-- Contador: "X canciones en el setlist"
+- Contador: "X canciones en El cartel"
 - Estados: loading, error, vacío, success
 - Diseño consistente con el festival (fondo crema, verde, dorado)
 

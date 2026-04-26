@@ -47,6 +47,8 @@ export default async function AdminPage() {
   const confirmed = guests.filter((g) => g.confirmed === true).length
   const pending = guests.filter((g) => g.confirmed === null).length
   const declined = guests.filter((g) => g.confirmed === false).length
+  const abonoCompleto = guests.filter((g) => g.abono === 'completo').length
+  const abonoTarde = guests.filter((g) => g.abono === 'tarde').length
 
   return (
     <main className="min-h-screen p-6 md:p-10" style={{ backgroundColor: 'var(--color-cream)' }}>
@@ -61,11 +63,13 @@ export default async function AdminPage() {
         {/* SECCIÓN 1 — Stats */}
         <section>
           <h2 className="text-lg font-semibold text-gray-700 mb-4">Estadísticas</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <StatCard label="Total invitados" value={total} color="var(--color-green-dark)" />
             <StatCard label="Confirmados" value={confirmed} color="#16a34a" />
             <StatCard label="Pendientes" value={pending} color="#ca8a04" />
             <StatCard label="No asisten" value={declined} color="#dc2626" />
+            <StatCard label="Abono día completo" value={abonoCompleto} color="#2563eb" />
+            <StatCard label="Abono de tarde" value={abonoTarde} color="#7c3aed" />
           </div>
         </section>
 

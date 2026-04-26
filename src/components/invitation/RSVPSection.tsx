@@ -87,7 +87,7 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                   </p>
                   {abono && (
                     <p className="text-sm text-[var(--color-green-dark)] font-medium mt-1">
-                      {abono === 'completo' ? 'Abono completo · Todo incluido' : 'Abono de tarde · Festival y cena'}
+                      {abono === 'completo' ? 'Abono día completo' : 'Abono de tarde'}
                     </p>
                   )}
                 </div>
@@ -159,10 +159,7 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                         }`}
                       >
                         <p className="font-playfair font-bold text-[var(--color-green-dark)] text-sm">
-                          Abono completo
-                        </p>
-                        <p className="text-xs font-inter text-[var(--color-text-muted)] mt-1">
-                          Todo incluido
+                          Abono día completo
                         </p>
                       </button>
                       <button
@@ -176,9 +173,6 @@ export function RSVPSection({ guest, onRSVPChange }: RSVPSectionProps) {
                       >
                         <p className="font-playfair font-bold text-[var(--color-green-dark)] text-sm">
                           Abono de tarde
-                        </p>
-                        <p className="text-xs font-inter text-[var(--color-text-muted)] mt-1">
-                          Sólo festival y cena
                         </p>
                       </button>
                     </div>

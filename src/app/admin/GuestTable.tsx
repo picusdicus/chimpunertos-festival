@@ -58,7 +58,7 @@ export default function GuestTable({ guests }: Props) {
               <th className="text-left px-4 py-3 font-medium text-gray-600">Nombre</th>
               <th className="text-left px-4 py-3 font-medium text-gray-600">Slug</th>
               <th className="text-left px-4 py-3 font-medium text-gray-600">Estado</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-600">Acompañante</th>
+              <th className="text-left px-4 py-3 font-medium text-gray-600">Abono</th>
               <th className="text-left px-4 py-3 font-medium text-gray-600">Confirmación</th>
               <th className="px-4 py-3"></th>
             </tr>
@@ -71,8 +71,18 @@ export default function GuestTable({ guests }: Props) {
                 <td className="px-4 py-3">
                   <StatusBadge confirmed={guest.confirmed} />
                 </td>
-                <td className="px-4 py-3 text-gray-600">
-                  {guest.plus_one === true ? 'Sí' : guest.plus_one === false ? 'No' : '—'}
+                <td className="px-4 py-3">
+                  {guest.abono === 'completo' ? (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      Completo
+                    </span>
+                  ) : guest.abono === 'tarde' ? (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                      Tarde
+                    </span>
+                  ) : (
+                    <span className="text-gray-400">—</span>
+                  )}
                 </td>
                 <td className="px-4 py-3 text-gray-500 text-xs">
                   {guest.confirmed !== null && guest.created_at
