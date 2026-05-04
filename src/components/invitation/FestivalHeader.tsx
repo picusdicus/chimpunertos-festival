@@ -23,7 +23,7 @@ export function FestivalHeader({
         </p>
 
         <Image
-          src="/images/logo-festival.png"
+          src="/images/logo-festival.jpg"
           alt="Chimpunerto's Festival"
           width={200}
           height={200}
