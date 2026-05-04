@@ -8,7 +8,7 @@ export interface HeroSectionProps {
 
 export function HeroSection({
   imageUrl,
-  coupleNames = 'Sole & Dani',
+  coupleNames = 'Dani & Sole',
   subtitle = 'Nos casamos · 25 Sep · 2026',
 }: HeroSectionProps) {
   return (
