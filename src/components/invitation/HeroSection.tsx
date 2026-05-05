@@ -29,7 +29,7 @@ export function HeroSection({
       <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 px-4 text-center">
         <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-[var(--color-white-warm)] mb-2">
           {coupleNames.split(' & ')[0]}{' '}
-          <span style={{ color: '#c13a64' }}>&</span>{' '}
+          <span className="font-inter font-light" style={{ color: '#c13a64' }}>&</span>{' '}
           {coupleNames.split(' & ')[1]}
         </h1>
         <p className="text-[var(--color-beige)] text-sm sm:text-base md:text-lg font-inter tracking-wide">
