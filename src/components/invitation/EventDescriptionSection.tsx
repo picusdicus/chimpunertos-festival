@@ -1,15 +1,19 @@
 export interface EventDescriptionSectionProps {
   title?: string
-  description?: string,
-  description2?: string,
+  description?: string
+  description2?: string
   description3?: string
+  description4?: string
+  description5?: string
 }
 
 export function EventDescriptionSection({
   title = '¿Qué es?',
-  description = 'Chimpunerto\u2019s Festival es la celebración por habernos encontrado. Todo empezó con un match y 9 años después, seguimos caminando juntos de la mano. ',
-  description2 = 'Este día será único e irrepetible y queremos celebrarlo con tod@s vosotr@s. Será un día para disfrutarnos, reirnos y abrazarnos.',
-  description3 = 'No hace falta vestirse de etiqueta, sólo ser nosotros mismos. Lo único importante es que vengáis con ganas de pasarlo bien. Chimpunerto\u2019s festival es una representación de quienes somos y de lo que nos mueve por dentro. Reservad vuestra entrada y que vuestros pies se preparen para saltar y bailar.'
+  description = 'Chimpunerto es la unión entre Chimpún y Rigoberto, o lo que es lo mismo, Sole y Dani. Todo empezó con un match y nueve años después seguimos caminando juntos de la mano.',
+  description2 = 'Chimpunerto’s Festival será la fiesta por habernos encontrado, la representación de quienes somos y de lo que nos mueve por dentro: la música.',
+  description3 = 'Tenemos muchas ganas de celebrarlo con todos vosotros y vosotras. Será un día para estar juntos, abrazarnos y pasarlo bien.',
+  description4 = 'No hace falta vestirse de etiqueta, solo ser nosotros mismos. Lo único importante es que vengáis con ganas de disfrutar. Así que reservad vuestra entrada y que vuestros pies se preparen para bailar.',
+  description5 = '¡Os esperamos!'
 }: EventDescriptionSectionProps) {
   return (
     <div className="w-full py-12 px-4 bg-[var(--color-white-warm)]">
@@ -18,14 +22,20 @@ export function EventDescriptionSection({
           {title}
         </h2>
         <div className="h-1 w-16 bg-[var(--color-gold)] mx-auto mb-6" />
-        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed">
+        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed mb-4">
           {description}
         </p>
-        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed">
+        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed mb-4">
           {description2}
         </p>
-        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed">
+        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed mb-4">
           {description3}
+        </p>
+        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed mb-4">
+          {description4}
+        </p>
+        <p className="font-inter text-lg text-[var(--color-text-dark)] leading-relaxed">
+          {description5}
         </p>
       </div>
     </div>
