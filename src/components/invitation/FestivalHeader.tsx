@@ -50,8 +50,8 @@ export function FestivalHeader({
           <p className="font-playfair text-2xl sm:text-3xl font-bold text-center text-[var(--color-white-warm)] uppercase tracking-wide flex items-center justify-center gap-3">
             <span>{coupleNames.first}</span>
             <span
-              className="text-4xl sm:text-5xl font-normal italic leading-none"
-              style={{ color: '#c13a64', fontFamily: 'Playfair Display, serif' }}
+              className="font-inter text-4xl sm:text-5xl font-light leading-none"
+              style={{ color: '#c13a64' }}
             >
               &amp;
             </span>
